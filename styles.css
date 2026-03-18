@@ -1,0 +1,179 @@
+:root{
+  --bg:#0a1f44;        /* derin Yunan mavisi */
+  --fg:#f5f9ff;        /* temiz beyaz */
+  --muted:#b8c7e0;     /* daha açık mavi ton */
+  --card:rgba(255,255,255,.08);
+  --border:rgba(255,255,255,.18);
+
+  /* ana tema renkleri */
+  --accent:#1e6fd9;    /* Yunan bayrağı mavisi */
+  --accent2:#5fa8ff;   /* açık mavi geçiş */
+
+  /* premium hissi için opsiyonel altın vurgu */
+  --gold:#d4af37;
+
+  --shadow: 0 12px 30px rgba(0,0,0,.35);
+  --radius:16px;
+}
+
+*{ box-sizing:border-box; }
+html{ scroll-behavior:smooth; }
+body{
+  margin:0;
+  font-family: 'Inter', sans-serif;
+  background:var(--bg);
+  color:var(--fg);
+  line-height:1.55;
+}
+
+h1, h2, h3{
+  font-family: 'Playfair Display', serif;
+  letter-spacing:.3px;
+}
+
+a{ color:inherit; text-decoration:none; }
+.container{
+  width:min(1100px, calc(100% - 40px));
+  margin:0 auto;
+}
+
+.topbar{
+  position:fixed;
+  top:0; left:0; right:0;
+  z-index:50;
+  background: rgba(8, 14, 26, .55);
+  border-bottom:1px solid rgba(255,255,255,.08);
+  backdrop-filter: blur(10px);
+}
+.topbar__inner{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  height:76px;
+  gap:16px;
+}
+.brand__logo{
+  height:120px; /* büyütüldü */
+  width:auto;
+  display:block;
+}
+.nav{
+  display:flex;
+  gap:22px;
+  align-items:center;
+}
+.nav a{
+  font-weight:600;
+  color: rgba(245,249,255,.92);
+  padding:10px 8px;
+  border-radius:10px;
+}
+.nav a:hover{
+  background: rgba(255,255,255,.07);
+}
+
+.nav__toggle{
+  display:none;
+  width:44px;
+  height:44px;
+  border:1px solid rgba(255,255,255,.14);
+  background: rgba(255,255,255,.06);
+  border-radius:12px;
+  box-shadow: var(--shadow);
+  cursor:pointer;
+}
+.nav__toggle span{
+  display:block;
+  height:2px;
+  width:20px;
+  background: rgba(245,249,255,.9);
+  margin:5px auto;
+  border-radius:2px;
+}
+
+.hero{
+  position:relative;
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  overflow:hidden;
+  padding-top:76px; /* topbar offset */
+}
+.hero__video{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  transform: scale(1.02);
+}
+.hero__overlay{
+  position:absolute;
+  inset:0;
+  background: linear-gradient(rgba(10,31,68,.65), rgba(10,31,68,.75));
+}
+.hero__content{
+  position:relative;
+  z-index:2;
+  padding:68px 0 80px;
+}
+.hero h1{
+  font-size: clamp(34px, 5vw, 56px);
+  letter-spacing:.2px;
+  margin:0 0 10px;
+}
+.hero p {
+  margin: 0 0 22px;
+  font-size: clamp(22px, 3vw, 28px);
+  font-weight: 600;
+  color: rgba(245,249,255, 0.88);
+  max-width: 56ch;
+}
+
+.hero__cta{
+  display:flex;
+  gap:12px;
+  flex-wrap:wrap;
+  margin-top: 8px;
+}
+.btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+  padding:12px 16px;
+  border-radius:14px;
+  border:1px solid transparent;
+  font-weight:700;
+  letter-spacing:.2px;
+  cursor:pointer;
+  user-select:none;
+}
+.btn--primary{
+  background: linear-gradient(135deg, var(--accent), var(--accent2));
+  color:white;
+  box-shadow: 0 6px 20px rgba(30,111,217,.4);
+}
+.btn--primary:hover{ filter: brightness(1.06); }
+.btn--ghost{
+  background: rgba(255,255,255,.08);
+  border-color: rgba(255,255,255,.18);
+}
+.btn--ghost:hover{ background: rgba(255,255,255,.12); }
+
+.hero__badges{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+  margin-top:18px;
+}
+.badge{
+  padding:8px 12px;
+  border-radius:999px;
+  background: rgba(30,111,217,.15);
+  border:1px solid rgba(30,111,217,.35);
+  font-weight:600;
+  color: #f5f9ff;
+}
+
+/* Diğer kodlar orijinal şekilde kaldı, sadece renk ve font değişiklikleri uygulandı */
