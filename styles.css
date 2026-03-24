@@ -153,6 +153,51 @@ h2{ font-size: 30px; margin:0 0 10px; }
   font-weight: 600;
   color: var(--fg);
 }
+/* Contact / Form Stilleri */
+.contact-form {
+  margin-top: 14px;
+  display: grid;
+  gap: 8px;
+}
+
+.contact-form label {
+  display: block;
+  font-weight: 700;
+  margin-bottom: 12px;
+  color: rgba(232,237,245,.86);
+}
+
+.contact-form input,
+.contact-form textarea {
+  width: 100%;
+  margin-top: 8px;
+  background: rgba(255,255,255,.06);
+  border: 1px solid rgba(255,255,255,.14);
+  border-radius: 12px;
+  padding: 12px;
+  color: var(--fg);
+  outline: none;
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  resize: vertical;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+  border-color: rgba(102,209,255,.55);
+  box-shadow: 0 0 0 3px rgba(102,209,255,.14);
+}
+
+.contact-form button {
+  max-width: 160px;
+  padding: 12px 18px;
+  border-radius: 12px;
+  border: none;
+  font-weight: 700;
+  cursor: pointer;
+  color: #fff;
+  background: linear-gradient(135deg, var(--accent), var(--accent2));
+}
 
 /* Footer */
 .footer{ padding:26px 0; border-top:1px solid rgba(0,0,0,.05); color: var(--muted); }
