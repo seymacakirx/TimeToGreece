@@ -1,16 +1,16 @@
-document.addEventListener("DOMContentLoaded", () => {
+window.addEventListener("load", () => {
+  // --- Yıl otomatik ---
   const yearEl = document.getElementById("year");
   if (yearEl) yearEl.textContent = new Date().getFullYear();
 
+  // --- Nav toggle ---
   const toggle = document.querySelector(".nav__toggle");
   const nav = document.querySelector(".nav");
-
   if (toggle && nav) {
     toggle.addEventListener("click", () => {
       const isOpen = nav.classList.toggle("is-open");
       toggle.setAttribute("aria-expanded", String(isOpen));
     });
-
     nav.querySelectorAll("a").forEach(a => {
       a.addEventListener("click", () => {
         nav.classList.remove("is-open");
@@ -19,21 +19,16 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // Smooth scroll with offset for fixed topbar
+  // --- Smooth scroll ---
   const topbarHeight = document.querySelector('.topbar').offsetHeight;
-
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function(e) {
       e.preventDefault();
       const target = document.querySelector(this.getAttribute('href'));
       if (target) {
         const targetPosition = target.getBoundingClientRect().top + window.scrollY - topbarHeight;
-        window.scrollTo({
-          top: targetPosition,
-          behavior: 'smooth'
-        });
+        window.scrollTo({ top: targetPosition, behavior: 'smooth' });
       }
-
       if (nav.classList.contains('is-open')) {
         nav.classList.remove('is-open');
         toggle.setAttribute('aria-expanded', 'false');
@@ -41,14 +36,14 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  // --- FİLO SLIDER KODU ---
+  // --- FİLO SLIDER ---
   const track = document.querySelector(".fleet-track");
   const prev = document.querySelector(".fleet-prev");
   const next = document.querySelector(".fleet-next");
 
   if (track && prev && next) {
     let position = 0;
-    const cardWidth = track.querySelector(".fleet-card").offsetWidth + 20;
+    const cardWidth = track.querySelector(".fleet-card").offsetWidth + 20; // 20 = gap
 
     const updateSlider = () => {
       const maxPosition = -(track.scrollWidth - track.clientWidth);
@@ -57,20 +52,11 @@ document.addEventListener("DOMContentLoaded", () => {
       track.style.transform = `translateX(${position}px)`;
     };
 
-    next.addEventListener("click", () => {
-      position -= cardWidth;
-      updateSlider();
-    });
+    next.addEventListener("click", () => { position -= cardWidth; updateSlider(); });
+    prev.addEventListener("click", () => { position += cardWidth; updateSlider(); });
 
-    prev.addEventListener("click", () => {
-      position += cardWidth;
-      updateSlider();
-    });
-
-    // Mobil parmakla kaydırma
-    let startX = 0;
-    let currentX = 0;
-    let isDragging = false;
+    // Mobil sürükleme
+    let startX = 0, currentX = 0, isDragging = false;
 
     track.addEventListener("pointerdown", e => {
       isDragging = true;
@@ -91,9 +77,7 @@ document.addEventListener("DOMContentLoaded", () => {
       isDragging = false;
       track.style.cursor = "grab";
       const diff = currentX - startX;
-      if (Math.abs(diff) > cardWidth / 4) {
-        position += diff > 0 ? cardWidth : -cardWidth;
-      }
+      if (Math.abs(diff) > cardWidth / 4) position += diff > 0 ? cardWidth : -cardWidth;
       track.style.transition = "transform .4s ease";
       updateSlider();
     };
@@ -102,14 +86,13 @@ document.addEventListener("DOMContentLoaded", () => {
     track.addEventListener("pointerleave", stopDrag);
   }
 
-  // --- AJAX FORMSPREE GÖNDERİMİ ---
+  // --- AJAX FORMSPREE ---
   const form = document.querySelector('form.contact-form.card');
   const thankMessage = document.getElementById("thankMessage");
 
-  if(form) {
-    form.addEventListener('submit', function(e) {
-      e.preventDefault(); // Sayfanın yenilenmesini engelle
-
+  if (form) {
+    form.addEventListener('submit', e => {
+      e.preventDefault(); // sayfa yenilenmesin
       const formData = new FormData(form);
 
       fetch("https://formspree.io/f/mgonyewa", {
@@ -119,18 +102,13 @@ document.addEventListener("DOMContentLoaded", () => {
       })
       .then(response => {
         if (response.ok) {
-          form.style.display = "none";       // formu gizle
-          thankMessage.style.display = "block"; // teşekkür mesajını göster
+          form.style.display = "none";
+          if (thankMessage) thankMessage.style.display = "block";
         } else {
-          return response.json().then(data => {
-            throw new Error(data.error || "Bir hata oluştu!");
-          });
+          return response.json().then(data => { throw new Error(data.error || "Bir hata oluştu!"); });
         }
       })
-      .catch(error => {
-        console.error("Form gönderilemedi:", error);
-        alert("Mesaj gönderilemedi, lütfen tekrar deneyin.");
-      });
+      .catch(error => { console.error("Form gönderilemedi:", error); alert("Mesaj gönderilemedi, lütfen tekrar deneyin."); });
     });
   }
 });
