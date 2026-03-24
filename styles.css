@@ -141,18 +141,20 @@ h2{ font-size: 30px; margin:0 0 10px; }
 .card h3{ margin:0 0 8px; }
 .card p{ margin:0; color: var(--muted); }
 
-/* Contact - form kaldırıldı, sadece bilgiler */
+/* Contact - form ve bilgiler */
 #contact {
   position: relative;
   z-index: 2;
   padding-top: 100px;
 }
+
 .contact-info {
   display: grid;
   gap: 10px;
   font-weight: 600;
   color: var(--fg);
 }
+
 /* Contact / Form Stilleri */
 .contact-form {
   margin-top: 14px;
@@ -164,7 +166,7 @@ h2{ font-size: 30px; margin:0 0 10px; }
   display: block;
   font-weight: 700;
   margin-bottom: 12px;
-  color: rgba(232,237,245,.86);
+  color: rgba(26,26,26,0.85); /* Daha koyu ve okunabilir */
 }
 
 .contact-form input,
@@ -175,7 +177,7 @@ h2{ font-size: 30px; margin:0 0 10px; }
   border: 1px solid rgba(255,255,255,.14);
   border-radius: 12px;
   padding: 12px;
-  color: var(--fg);
+  color: rgba(26,26,26,0.9); /* Daha koyu yazı rengi */
   outline: none;
   font-family: 'Inter', sans-serif;
   font-size: 16px;
