@@ -5,13 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Time To Greece</title>
 
-  <link rel="stylesheet" href="styles.css">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
-
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
   <meta name="description" content="Time To Greece — Yunanistan Golden Visa ve yatırım danışmanlığı." />
-  <link rel="preload" href="./assets/hero.mp4" as="video" type="video/mp4">
+  <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
@@ -25,7 +21,7 @@
       <nav class="nav" aria-label="Ana menü">
         <a href="#about">Hakkımızda</a>
         <a href="#services">Hizmetlerimiz</a>
-        <a href="#process">Süreç</a>
+        <a href="#portfolio">Süreç</a>
         <a href="#contact">İletişim</a>
       </nav>
 
@@ -40,6 +36,7 @@
     <video class="hero__video" autoplay muted loop playsinline preload="auto" poster="./assets/poster.jpg">
       <source src="./assets/hero.mp4" type="video/mp4" />
     </video>
+
     <div class="hero__overlay"></div>
 
     <section class="hero__content container">
@@ -57,12 +54,8 @@
     <div class="container grid">
       <div>
         <h2>Hakkımızda</h2>
-        <p>
-          Time To Greece, Yunanistan’da yatırım yaparak vatandaşlık veya oturma izni almak isteyen bireyler için uzman danışmanlık hizmeti sunar.
-        </p>
-        <p class="muted">
-          Süreç boyunca profesyonel rehberlik ile hızlı, güvenilir ve şeffaf hizmet sağlıyoruz.
-        </p>
+        <p>Time To Greece, Yunanistan’da yatırım yaparak vatandaşlık veya oturma izni almak isteyen bireyler için uzman danışmanlık hizmeti sunar.</p>
+        <p class="muted">Süreç boyunca profesyonel rehberlik ile hızlı, güvenilir ve şeffaf hizmet sağlıyoruz.</p>
       </div>
     </div>
   </section>
@@ -131,36 +124,48 @@
     </div>
   </section>
 
-  <!-- SÜREÇ -->
-  <section id="process" class="section process">
+  <!-- SÜREÇ / PROCESS SLIDER -->
+  <section id="portfolio" class="section fleet">
     <div class="container">
       <h2>Süreç</h2>
-      <p class="lead">Golden Visa başvurusu ve yatırım sürecinizde takip edeceğiniz adımlar.</p>
+      <p class="lead">Golden Visa başvuru ve yatırım sürecinizdeki adımlar.</p>
 
-      <div class="process-cards">
-        <div class="process-card">
-          <img src="assets/step1.jpg" alt="Başvuru Hazırlığı" />
-          <h3>1. Başvuru Hazırlığı</h3>
-          <p>Belgelerinizin hazırlanması ve ilk değerlendirme.</p>
+      <div class="fleet-slider">
+        <button class="fleet-btn fleet-prev">&#10094;</button>
+
+        <div class="fleet-track">
+          <div class="fleet-card process-card">
+            <img src="assets/step1.jpg" alt="Başvuru Hazırlığı">
+            <h3>Başvuru Hazırlığı</h3>
+            <p>Belgelerin toplanması ve başvuru öncesi hazırlıkların tamamlanması.</p>
+          </div>
+
+          <div class="fleet-card process-card">
+            <img src="assets/step2.jpg" alt="Yatırım Seçimi">
+            <h3>Yatırım Seçimi</h3>
+            <p>Golden Visa kriterlerine uygun gayrimenkul veya yatırım aracının seçilmesi.</p>
+          </div>
+
+          <div class="fleet-card process-card">
+            <img src="assets/step3.jpg" alt="Başvurunun Sunulması">
+            <h3>Başvurunun Sunulması</h3>
+            <p>Belgelerin resmi makamlara iletilmesi ve başvurunun yapılması.</p>
+          </div>
+
+          <div class="fleet-card process-card">
+            <img src="assets/step4.jpg" alt="Onay ve Oturma İzni">
+            <h3>Onay ve Oturma İzni</h3>
+            <p>Başvurunun onaylanması ve oturma izninin alınması.</p>
+          </div>
+
+          <div class="fleet-card process-card">
+            <img src="assets/step5.jpg" alt="Taşınma ve Yerleşim">
+            <h3>Taşınma ve Yerleşim</h3>
+            <p>Yunanistan’a taşınma ve yatırım yapılan mülkün kullanımına başlama.</p>
+          </div>
         </div>
 
-        <div class="process-card">
-          <img src="assets/step2.jpg" alt="Yatırım Seçimi" />
-          <h3>2. Yatırım Seçimi</h3>
-          <p>Yunanistan’da uygun mülk veya iş fırsatlarının belirlenmesi.</p>
-        </div>
-
-        <div class="process-card">
-          <img src="assets/step3.jpg" alt="Başvuru ve Onay" />
-          <h3>3. Başvuru ve Onay</h3>
-          <p>Golden Visa başvurusunun yapılması ve resmi onay süreci.</p>
-        </div>
-
-        <div class="process-card">
-          <img src="assets/step4.jpg" alt="Oturma İzni ve Yerleşim" />
-          <h3>4. Oturma İzni ve Yerleşim</h3>
-          <p>Yatırım sonrası oturma izninizin alınması ve yerleşim süreci.</p>
-        </div>
+        <button class="fleet-btn fleet-next">&#10095;</button>
       </div>
     </div>
   </section>
@@ -179,6 +184,7 @@
         </div>
       </div>
 
+      <!-- Formspree Formu -->
       <form class="card form" action="https://formspree.io/f/mgonyewa" method="POST">
         <label>
           Ad Soyad
@@ -203,7 +209,7 @@
       <div class="footer__links">
         <a href="#about">Hakkımızda</a>
         <a href="#services">Hizmetlerimiz</a>
-        <a href="#process">Süreç</a>
+        <a href="#portfolio">Süreç</a>
         <a href="#contact">İletişim</a>
       </div>
     </div>
