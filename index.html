@@ -42,8 +42,7 @@
     <section class="hero__content container">
       <h1>Time To Greece</h1>
       <p>Hayalinize Giden Yol</p>
-      <div class="hero__cta">
-      </div>
+      <div class="hero__cta"></div>
     </section>
   </main>
 
@@ -80,28 +79,28 @@
     </div>
   </section>
 
- <section class="section">
-  <div class="container">
-    <h2>Neden Yunanistan?</h2>
-    <div class="cards">
-      <div class="card">
-        <img src="img/eu.png" alt="AB Serbest Dolaşım" />
-        <h3>AB Serbest Dolaşım</h3>
-        <p>Schengen bölgesinde özgürce seyahat etme imkânı, Avrupa ülkelerine kolay erişim ve iş veya tatil amaçlı rahat hareket özgürlüğü sağlar.</p>
-      </div>
-      <div class="card">
-        <img src="img/life.png" alt="Yüksek Yaşam Kalitesi" />
-        <h3>Yüksek Yaşam Kalitesi</h3>
-        <p>Akdeniz yaşam tarzı, güvenli ve huzurlu ortam, kaliteli sağlık ve eğitim hizmetleri ile konforlu bir yaşam sunar.</p>
-      </div>
-      <div class="card">
-        <img src="img/location.png" alt="Stratejik Konum" />
-        <h3>Stratejik Konum</h3>
-        <p>Türkiye’ye yakınlığı ve Avrupa’ya açılan merkezi konumu sayesinde hem iş hem yatırım fırsatlarında avantaj sağlar.</p>
+  <section class="section">
+    <div class="container">
+      <h2>Neden Yunanistan?</h2>
+      <div class="cards">
+        <div class="card">
+          <img src="img/eu.png" alt="AB Serbest Dolaşım" />
+          <h3>AB Serbest Dolaşım</h3>
+          <p>Schengen bölgesinde özgürce seyahat etme imkânı, Avrupa ülkelerine kolay erişim ve iş veya tatil amaçlı rahat hareket özgürlüğü sağlar.</p>
+        </div>
+        <div class="card">
+          <img src="img/life.png" alt="Yüksek Yaşam Kalitesi" />
+          <h3>Yüksek Yaşam Kalitesi</h3>
+          <p>Akdeniz yaşam tarzı, güvenli ve huzurlu ortam, kaliteli sağlık ve eğitim hizmetleri ile konforlu bir yaşam sunar.</p>
+        </div>
+        <div class="card">
+          <img src="img/location.png" alt="Stratejik Konum" />
+          <h3>Stratejik Konum</h3>
+          <p>Türkiye’ye yakınlığı ve Avrupa’ya açılan merkezi konumu sayesinde hem iş hem yatırım fırsatlarında avantaj sağlar.</p>
+        </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
   <!-- SÜREÇ / PROCESS SLIDER -->
   <section id="portfolio" class="section fleet">
@@ -118,25 +117,21 @@
             <h3>Başvuru Hazırlığı</h3>
             <p>Belgelerin toplanması ve başvuru öncesi hazırlıkların tamamlanması.</p>
           </div>
-
           <div class="fleet-card process-card">
             <img src="assets/step2.jpg" alt="Yatırım Seçimi">
             <h3>Yatırım Seçimi</h3>
             <p>Golden Visa kriterlerine uygun gayrimenkul veya yatırım aracının seçilmesi.</p>
           </div>
-
           <div class="fleet-card process-card">
             <img src="assets/step3.jpg" alt="Başvurunun Sunulması">
             <h3>Başvurunun Sunulması</h3>
             <p>Belgelerin resmi makamlara iletilmesi ve başvurunun yapılması.</p>
           </div>
-
           <div class="fleet-card process-card">
             <img src="assets/step4.jpg" alt="Onay ve Oturma İzni">
             <h3>Onay ve Oturma İzni</h3>
             <p>Başvurunun onaylanması ve oturma izninin alınması.</p>
           </div>
-
           <div class="fleet-card process-card">
             <img src="assets/step5.jpg" alt="Taşınma ve Yerleşim">
             <h3>Taşınma ve Yerleşim</h3>
@@ -149,40 +144,43 @@
     </div>
   </section>
 
-<!-- CONTACT -->
-<section id="contact" class="section">
-  <div class="container grid">
-    <div>
-      <h2>İletişim</h2>
-      <p>Hemen bizimle iletişime geçin, Golden Visa başvurunuzu başlatalım.</p>
+  <!-- CONTACT -->
+  <section id="contact" class="section">
+    <div class="container grid">
+      <div>
+        <h2>İletişim</h2>
+        <p>Hemen bizimle iletişime geçin, Golden Visa başvurunuzu başlatalım.</p>
 
-      <div class="contact-info">
-        <div><strong>E-posta:</strong> info@orientagrup.com.tr</div>
-        <div><strong>Telefon:</strong> +90 (536) 265 20 41</div>
-        <div><strong>Adres:</strong> Atina, Yunanistan</div>
+        <div class="contact-info">
+          <div><strong>E-posta:</strong> info@orientagrup.com.tr</div>
+          <div><strong>Telefon:</strong> +90 (536) 265 20 41</div>
+          <div><strong>Adres:</strong> Atina, Yunanistan</div>
+        </div>
+      </div>
+
+      <div>
+        <!-- Formspree Formu AJAX ile -->
+        <form class="contact-form card" id="contactForm">
+          <label>
+            Ad Soyad
+            <input type="text" name="name" placeholder="Adınız Soyadınız" required>
+          </label>
+          <label>
+            E-posta
+            <input type="email" name="email" placeholder="ornek@mail.com" required>
+          </label>
+          <label>
+            Mesaj
+            <textarea name="message" rows="5" placeholder="Kısaca ihtiyacınızı yazın..." required></textarea>
+          </label>
+          <button type="submit">Gönder</button>
+        </form>
+        <div id="thankMessage" style="display:none; color:green; margin-top:12px;">
+          Teşekkürler! Mesajınız alındı.
+        </div>
       </div>
     </div>
-
-    <div>
-      <!-- Formspree Formu -->
-      <form class="contact-form card" action="https://formspree.io/f/mgonyewa" method="POST">
-        <label>
-          Ad Soyad
-          <input type="text" name="name" placeholder="Adınız Soyadınız" required>
-        </label>
-        <label>
-          E-posta
-          <input type="email" name="email" placeholder="ornek@mail.com" required>
-        </label>
-        <label>
-          Mesaj
-          <textarea name="message" rows="5" placeholder="Kısaca ihtiyacınızı yazın..." required></textarea>
-        </label>
-        <button type="submit">Gönder</button>
-      </form>
-    </div>
-  </div>
-</section>
+  </section>
 
   <footer class="footer">
     <div class="container footer__inner">
@@ -196,6 +194,38 @@
     </div>
   </footer>
 
-  <script src="script.js"></script>
+  <!-- JS -->
+  <script>
+    // Güncel yılı footer'a ekle
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    // Formspree AJAX submit
+    const form = document.getElementById("contactForm");
+    const thankMessage = document.getElementById("thankMessage");
+
+    form.addEventListener("submit", function(e) {
+      e.preventDefault(); // Sayfa yönlenmesini engelle
+
+      const formData = new FormData(form);
+
+      fetch("https://formspree.io/f/mgonyewa", {
+        method: "POST",
+        body: formData,
+        headers: { 'Accept': 'application/json' }
+      })
+      .then(response => {
+        if (response.ok) {
+          form.style.display = "none";
+          thankMessage.style.display = "block";
+        } else {
+          alert("Bir hata oluştu, lütfen tekrar deneyin.");
+        }
+      })
+      .catch(error => {
+        alert("Bir hata oluştu, lütfen tekrar deneyin.");
+        console.error(error);
+      });
+    });
+  </script>
 </body>
 </html>
