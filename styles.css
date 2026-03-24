@@ -203,6 +203,25 @@ h2{
   border-radius: var(--radius);
   padding:18px;
   box-shadow: var(--shadow);
+  transition: all .35s ease;
+  position: relative;
+  overflow: hidden;
+}
+.card::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background: linear-gradient(120deg, transparent, rgba(13,59,102,.05), transparent);
+  opacity:0;
+  transition:.4s;
+}
+.card:hover::before{
+  opacity:1;
+}
+.card:hover{
+  transform: translateY(-5px) scale(1.01);
+  box-shadow: 0 15px 40px rgba(0,0,0,.2);
+  border-color: rgba(0,0,0,.15);
 }
 .card h3{ margin:0 0 8px; }
 .card p{ margin:0; color: var(--muted); }
@@ -252,7 +271,7 @@ input:focus, textarea:focus{
 }
 .footer__links a:hover{ text-decoration: underline; }
 
-/* Fleet / Process Slider */
+/* Fleet / Process Slider (tamamen beyaz bırakıldı) */
 .fleet-slider{
   position:relative;
   margin-top:30px;
@@ -267,7 +286,7 @@ input:focus, textarea:focus{
 
 .fleet-card{
   min-width:320px;
-  background: var(--card-bg);
+  background: var(--card-bg); /* beyaz/ açık gri */
   border:1px solid var(--card-border);
   border-radius: var(--radius);
   box-shadow: var(--shadow);
@@ -303,29 +322,6 @@ input:focus, textarea:focus{
 .fleet-next{ right:-10px; }
 .fleet-btn:hover{
   background:rgba(0,0,0,.35);
-}
-
-/* Hover Effects */
-.card{
-  transition: all .35s ease;
-  position: relative;
-  overflow: hidden;
-}
-.card::before{
-  content:"";
-  position:absolute;
-  inset:0;
-  background: linear-gradient(120deg, transparent, rgba(0,0,0,.05), transparent);
-  opacity:0;
-  transition:.4s;
-}
-.card:hover::before{
-  opacity:1;
-}
-.card:hover{
-  transform: translateY(-5px) scale(1.01);
-  box-shadow: 0 15px 40px rgba(0,0,0,.2);
-  border-color: rgba(0,0,0,.15);
 }
 
 /* Headings accent line */
