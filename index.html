@@ -4,10 +4,13 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Time To Greece</title>
-
   <link rel="stylesheet" href="styles.css">
   <meta name="description" content="Time To Greece — Yunanistan Golden Visa ve yatırım danışmanlığı." />
   <link rel="preload" href="./assets/hero.mp4" as="video" type="video/mp4">
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
 
 <body>
@@ -36,7 +39,6 @@
     <video class="hero__video" autoplay muted loop playsinline preload="auto" poster="./assets/poster.jpg">
       <source src="./assets/hero.mp4" type="video/mp4" />
     </video>
-
     <div class="hero__overlay"></div>
 
     <section class="hero__content container">
@@ -54,17 +56,13 @@
     <div class="container grid">
       <div>
         <h2>Hakkımızda</h2>
-        <p>
-Time To Greece, Yunanistan’da yatırım yaparak vatandaşlık veya oturma izni almak isteyen bireyler için uzman danışmanlık hizmeti sunar.
-        </p>
-        <p class="muted">
-Süreç boyunca profesyonel rehberlik ile hızlı, güvenilir ve şeffaf hizmet sağlıyoruz.
-        </p>
+        <p>Time To Greece, Yunanistan’da yatırım yaparak vatandaşlık veya oturma izni almak isteyen bireyler için uzman danışmanlık hizmeti sunar.</p>
+        <p class="muted">Süreç boyunca profesyonel rehberlik ile hızlı, güvenilir ve şeffaf hizmet sağlıyoruz.</p>
       </div>
     </div>
   </section>
 
-  <!-- HİZMETLERİMİZ (Hakkımızdadan sonra) -->
+  <!-- HİZMETLERİMİZ -->
   <section id="services" class="section section--alt">
     <div class="container">
       <h2>Hizmetlerimiz</h2>
@@ -133,48 +131,25 @@ Süreç boyunca profesyonel rehberlik ile hızlı, güvenilir ve şeffaf hizmet 
     <div class="container">
       <h2>Yatırım Portföyümüz</h2>
       <p class="lead">Golden Visa için uygun, yüksek değerli gayrimenkul seçenekleri.</p>
-
       <div class="fleet-slider">
         <button class="fleet-btn fleet-prev">&#10094;</button>
-
         <div class="fleet-track">
           <div class="fleet-card">
             <img src="assets/property1.jpg" alt="Atena Luxury Villa">
             <h3>Atena Luxury Villa</h3>
             <p>Denize sıfır villa, özel havuz ve manzaralı teras ile yatırım fırsatı.</p>
           </div>
-
           <div class="fleet-card">
             <img src="assets/property2.jpg" alt="Mykonos Sea View Apartment">
             <h3>Mykonos Sea View Apartment</h3>
             <p>Golden Visa kriterlerine uygun, modern 2+1 daire.</p>
           </div>
-
           <div class="fleet-card">
             <img src="assets/property3.jpg" alt="Santorini Estate">
             <h3>Santorini Estate</h3>
             <p>Turistik bölgede, yüksek kira getirisi potansiyeli olan mülk.</p>
           </div>
-
-          <div class="fleet-card">
-            <img src="assets/property4.jpg" alt="Athens Downtown Apartment">
-            <h3>Athens Downtown Apartment</h3>
-            <p>Şehir merkezinde yatırım için ideal, modern daire.</p>
-          </div>
-
-          <div class="fleet-card">
-            <img src="assets/property5.jpg" alt="Crete Villa">
-            <h3>Crete Villa</h3>
-            <p>Deniz manzaralı ve Golden Visa uyumlu, 3+1 lüks villa.</p>
-          </div>
-
-          <div class="fleet-card">
-            <img src="assets/property6.jpg" alt="Thessaloniki Modern Apartment">
-            <h3>Thessaloniki Modern Apartment</h3>
-            <p>Şehirde merkezi konum, kira getirisi yüksek yatırım dairesi.</p>
-          </div>
         </div>
-
         <button class="fleet-btn fleet-next">&#10095;</button>
       </div>
     </div>
@@ -186,7 +161,6 @@ Süreç boyunca profesyonel rehberlik ile hızlı, güvenilir ve şeffaf hizmet 
       <div>
         <h2>İletişim</h2>
         <p>Hemen bizimle iletişime geçin, Golden Visa başvurunuzu başlatalım.</p>
-
         <div class="contact">
           <div><strong>E-posta:</strong> info@orientagrup.com.tr</div>
           <div><strong>Telefon:</strong> +90 (536) 265 20 41</div>
@@ -194,18 +168,14 @@ Süreç boyunca profesyonel rehberlik ile hızlı, güvenilir ve şeffaf hizmet 
         </div>
       </div>
 
-      <!-- Formspree Formu -->
       <form class="card form" action="https://formspree.io/f/mgonyewa" method="POST">
-        <label>
-          Ad Soyad
+        <label>Ad Soyad
           <input type="text" name="name" placeholder="Adınız Soyadınız" required>
         </label>
-        <label>
-          E-posta
+        <label>E-posta
           <input type="email" name="email" placeholder="ornek@mail.com" required>
         </label>
-        <label>
-          Mesaj
+        <label>Mesaj
           <textarea name="message" rows="5" placeholder="Kısaca ihtiyacınızı yazın..." required></textarea>
         </label>
         <button class="btn btn--primary" type="submit">Gönder</button>
@@ -226,5 +196,14 @@ Süreç boyunca profesyonel rehberlik ile hızlı, güvenilir ve şeffaf hizmet 
   </footer>
 
   <script src="script.js"></script>
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+    const navToggle = document.querySelector('.nav__toggle');
+    const nav = document.querySelector('.nav');
+    navToggle.addEventListener('click', () => {
+      nav.classList.toggle('is-open');
+      navToggle.setAttribute('aria-expanded', nav.classList.contains('is-open'));
+    });
+  </script>
 </body>
 </html>
