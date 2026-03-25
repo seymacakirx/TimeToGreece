@@ -4,13 +4,210 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Time To Greece</title>
-
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
   <meta name="description" content="Time To Greece — Yunanistan Golden Visa ve yatırım danışmanlığı." />
-  <link rel="stylesheet" href="styles.css">
-</head>
+  <style>
+    :root{
+      --bg: #ffffff;          
+      --fg: #1a1a1a;          
+      --muted: #555555;       
+      --card-bg: #f7f9fc;     
+      --card-border: #dcdcdc; 
+      --accent: #0d3b66;      
+      --accent2: #145da0;     
+      --gold: #d4af37;
+      --shadow: 0 12px 30px rgba(0,0,0,.15);
+      --radius:16px;
+    }
 
+    /* Temel stiller */
+    *{ box-sizing:border-box; }
+    html{ scroll-behavior:smooth; }
+    body{
+      margin:0;
+      font-family: 'Inter', sans-serif;
+      background:var(--bg);
+      color:var(--fg);
+      line-height:1.55;
+    }
+
+    h1,h2,h3{ font-family:'Inter',sans-serif; letter-spacing:.3px; }
+    a{ color:inherit; text-decoration:none; }
+    .container{ width:min(1100px, calc(100% - 40px)); margin:0 auto; }
+
+    /* Topbar */
+    .topbar{
+      position: fixed;
+      top:0; left:0; right:0;
+      z-index:50;
+      background: rgba(255,255,255,0.7);
+      border-bottom:1px solid rgba(0,0,0,.08);
+      backdrop-filter: blur(10px);
+    }
+    .topbar__inner{ display:flex; align-items:center; justify-content:space-between; height:76px; gap:16px; }
+    .brand__logo{ height:120px; width:auto; display:block; }
+    .nav{ display:flex; gap:22px; align-items:center; }
+    .nav a{ font-weight:600; color: rgba(26,26,26,.9); padding:10px 8px; border-radius:10px; }
+    .nav__toggle{
+      display:none;
+      width:44px; height:44px;
+      border:1px solid rgba(0,0,0,.14);
+      background: rgba(245,245,245,.9);
+      border-radius:12px;
+      box-shadow: var(--shadow);
+      cursor:pointer;
+    }
+    .nav__toggle span{ display:block; height:2px; width:20px; background: rgba(26,26,26,.9); margin:5px auto; border-radius:2px; }
+
+    /* Hero */
+    .hero{
+      position:relative;
+      min-height:100vh;
+      display:flex;
+      align-items:center;
+      overflow:hidden;
+      padding-top:76px;
+    }
+    .hero__video{
+      position:absolute;
+      inset:0;
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      transform: scale(1.02);
+    }
+    .hero__overlay{
+      position:absolute;
+      inset:0;
+      background: linear-gradient(rgba(0,30,60,0.3), rgba(0,30,60,0.4));
+      pointer-events:none;
+      z-index:1;
+    }
+    .hero__content{
+      position:relative;
+      z-index:2;
+      padding:68px 0 80px;
+    }
+    .hero h1{ font-size:clamp(34px,5vw,56px); letter-spacing:.2px; margin:0 0 10px; color:#fff; }
+    .hero p{ margin:0 0 22px; font-size:clamp(22px,3vw,28px); font-weight:600; color:#fff; }
+    .hero__cta{ display:flex; gap:12px; flex-wrap:wrap; margin-top:8px; }
+
+    /* Buttons */
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:10px;
+      padding:12px 16px;
+      border-radius:14px;
+      border:1px solid transparent;
+      font-weight:700;
+      letter-spacing:.2px;
+      cursor:pointer;
+      user-select:none;
+    }
+    .btn--primary{
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      color:white;
+      box-shadow: 0 6px 20px rgba(13,59,102,.3);
+    }
+    .btn--ghost{
+      background: rgba(13,59,102,.05);
+      border-color: rgba(13,59,102,.2);
+      color: var(--accent);
+    }
+
+    /* Sections */
+    .section{ padding:72px 0; border-top:1px solid rgba(0,0,0,.03); }
+    .section--alt{ background: rgba(245,245,245,.3); }
+    h2{ font-size:30px; margin:0 0 10px; }
+    .lead{ margin:0 0 26px; color: var(--muted); }
+    .muted{ color: var(--muted); }
+
+    /* Grid ve kartlar */
+    .grid{ display:grid; grid-template-columns: 1.15fr .85fr; gap:24px; align-items:start; }
+    .cards{ display:grid; grid-template-columns: repeat(3,1fr); gap:18px; margin-top:18px; }
+    .card{
+      background: var(--card-bg);
+      border:1px solid var(--card-border);
+      border-radius: var(--radius);
+      padding:18px;
+      box-shadow: var(--shadow);
+      position: relative;
+      overflow: hidden;
+    }
+    .card h3{ margin:0 0 8px; }
+    .card p{ margin:0; color: var(--muted); }
+
+    /* Contact */
+    #contact{ position:relative; z-index:2; padding-top:100px; }
+    .contact-info{ display:grid; gap:10px; font-weight:600; color:var(--fg); }
+    .contact-form{ margin-top:14px; display:grid; gap:8px; }
+    .contact-form label{ display:block; font-weight:700; margin-bottom:12px; color:rgba(26,26,26,0.85); }
+    .contact-form input, .contact-form textarea{
+      width:100%; margin-top:8px; background: rgba(255,255,255,.06);
+      border:1px solid rgba(255,255,255,.14); border-radius:12px;
+      padding:12px; color:rgba(26,26,26,0.9); outline:none;
+      font-family:'Inter',sans-serif; font-size:16px; resize:vertical;
+    }
+    .contact-form input:focus, .contact-form textarea:focus{
+      border-color: rgba(102,209,255,.55);
+      box-shadow: 0 0 0 3px rgba(102,209,255,.14);
+    }
+    .contact-form button{
+      max-width:160px; padding:12px 18px; border-radius:12px; border:none;
+      font-weight:700; cursor:pointer; color:#fff; background: linear-gradient(135deg,var(--accent),var(--accent2));
+    }
+
+    /* Footer */
+    .footer{ padding:26px 0; border-top:1px solid rgba(0,0,0,.05); color: var(--muted); }
+    .footer__inner{ display:flex; justify-content:space-between; gap:16px; flex-wrap:wrap; }
+    .footer__links{ display:flex; gap:14px; }
+
+    /* Fleet Slider */
+    .fleet-slider{ position:relative; margin-top:30px; overflow:hidden; }
+    .fleet-track{ display:flex; gap:20px; transition: transform .4s ease; cursor:grab; touch-action: pan-y; }
+    .fleet-card{
+      flex:0 0 auto; min-width:320px; background:var(--card-bg);
+      border:1px solid var(--card-border); border-radius: var(--radius); box-shadow: var(--shadow); overflow:hidden;
+    }
+    .fleet-card img{ width:100%; height:200px; object-fit:cover; }
+    .fleet-card h3{ margin:14px 16px 6px; }
+    .fleet-card p{ margin:0 16px 18px; color: var(--muted); }
+    .fleet-btn{
+      position:absolute; top:40%; transform:translateY(-50%);
+      width:44px; height:44px; border-radius:50%;
+      border:1px solid rgba(0,0,0,.2); background:rgba(0,0,0,.2);
+      color:white; font-size:22px; cursor:pointer; z-index:5;
+    }
+    .fleet-prev{ left:-10px; }
+    .fleet-next{ right:-10px; }
+
+    /* Heading accent line */
+    .section h2{ position:relative; display:inline-block; padding-bottom:8px; }
+    .section h2::after{
+      content:""; position:absolute; left:0; bottom:0;
+      width:40%; height:2px;
+      background: linear-gradient(90deg,var(--accent),var(--accent2));
+    }
+
+    /* Responsive */
+    @media (max-width:900px){ .cards{ grid-template-columns:1fr; } .grid{ grid-template-columns:1fr; } }
+    @media (max-width:720px){
+      .nav{ display:none; }
+      .nav__toggle{ display:inline-block; }
+      .nav.is-open{
+        display:flex; position:absolute; top:76px; right:20px;
+        flex-direction:column; align-items:stretch; background: rgba(255,255,255,.95);
+        border:1px solid rgba(0,0,0,.1); border-radius:16px; padding:10px;
+        width:min(240px,calc(100% - 40px));
+      }
+      .brand__logo{ height:90px; }
+    }
+  </style>
+</head>
 <body>
+
   <!-- Top Bar -->
   <header class="topbar" aria-label="Site üst menüsü">
     <div class="container topbar__inner">
@@ -36,9 +233,7 @@
     <video class="hero__video" autoplay muted loop playsinline preload="auto" poster="./assets/poster.jpg">
       <source src="./assets/hero.mp4" type="video/mp4" />
     </video>
-
     <div class="hero__overlay"></div>
-
     <section class="hero__content container">
       <h1>Time To Greece</h1>
       <p>Hayalinize Giden Yol</p>
@@ -57,7 +252,7 @@
     </div>
   </section>
 
-  <!-- HİZMETLERİMİZ -->
+  <!-- Hizmetlerimiz -->
   <section id="services" class="section section--alt">
     <div class="container">
       <h2>Hizmetlerimiz</h2>
@@ -65,114 +260,56 @@
       <div class="cards">
         <div class="card">
           <h3>Golden Visa Başvurusu</h3>
-          <p>Süreci baştan sona yönetiyoruz. Yatırım fırsatlarının belirlenmesinden, başvuru belgelerinin hazırlanmasına, resmi işlemlerin takibine kadar her adımda profesyonel destek sağlıyoruz. Başvuru sahiplerinin süreç boyunca doğru ve güncel bilgilere erişmesini garanti ediyor, hızlı ve güvenli bir şekilde sonuç almayı hedefliyoruz. Kişiye özel rehberlik ile başvurunuzu sorunsuz bir şekilde tamamlamanıza yardımcı oluyoruz.</p>
+          <p>Süreci baştan sona yönetiyoruz. Başvuru belgelerinin hazırlanmasından resmi işlemlerin takibine kadar her adımda profesyonel destek sağlıyoruz.</p>
         </div>
         <div class="card">
           <h3>Gayrimenkul Yatırımı</h3>
-          <p>En doğru yatırımı bulmanızı sağlıyoruz. Yunanistan’daki gayrimenkul piyasasını titizlikle analiz ediyor, bütçenize ve hedeflerinize uygun seçenekleri belirliyoruz. Yatırım sürecinde tüm adımlarda rehberlik ederek, güvenli ve kazançlı bir yatırım yapmanıza yardımcı oluyoruz.</p>
+          <p>Yunanistan’daki gayrimenkul piyasasını analiz ederek, bütçenize ve hedeflerinize uygun seçenekleri belirliyoruz.</p>
         </div>
         <div class="card">
           <h3>Hukuki Danışmanlık</h3>
-          <p>Tüm işlemler güvence altında. Yatırım ve başvuru süreçlerinde karşılaşabileceğiniz hukuki adımları önceden planlıyor, belgelerin doğru ve eksiksiz hazırlanmasını sağlıyoruz. Yunanistan mevzuatına uygun hareket ederek, sürecin sorunsuz ilerlemesini ve haklarınızın korunmasını garanti ediyoruz.</p>
+          <p>Yatırım ve başvuru süreçlerinde hukuki adımları önceden planlıyor, belgelerin doğru ve eksiksiz hazırlanmasını sağlıyoruz.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <section class="section">
-    <div class="container">
-      <h2>Neden Yunanistan?</h2>
-      <div class="cards">
-        <div class="card">
-          <img src="img/eu.png" alt="AB Serbest Dolaşım" />
-          <h3>AB Serbest Dolaşım</h3>
-          <p>Schengen bölgesinde özgürce seyahat etme imkânı, Avrupa ülkelerine kolay erişim ve iş veya tatil amaçlı rahat hareket özgürlüğü sağlar.</p>
-        </div>
-        <div class="card">
-          <img src="img/life.png" alt="Yüksek Yaşam Kalitesi" />
-          <h3>Yüksek Yaşam Kalitesi</h3>
-          <p>Akdeniz yaşam tarzı, güvenli ve huzurlu ortam, kaliteli sağlık ve eğitim hizmetleri ile konforlu bir yaşam sunar.</p>
-        </div>
-        <div class="card">
-          <img src="img/location.png" alt="Stratejik Konum" />
-          <h3>Stratejik Konum</h3>
-          <p>Türkiye’ye yakınlığı ve Avrupa’ya açılan merkezi konumu sayesinde hem iş hem yatırım fırsatlarında avantaj sağlar.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- SÜREÇ / PROCESS SLIDER -->
+  <!-- Fleet Slider / Süreç -->
   <section id="portfolio" class="section fleet">
     <div class="container">
       <h2>Süreç</h2>
       <p class="lead">Golden Visa başvuru ve yatırım sürecinizdeki adımlar.</p>
-
       <div class="fleet-slider">
         <button class="fleet-btn fleet-prev">&#10094;</button>
-
         <div class="fleet-track">
-          <div class="fleet-card process-card">
-            <img src="assets/step1.jpg" alt="Başvuru Hazırlığı">
-            <h3>Başvuru Hazırlığı</h3>
-            <p>Belgelerin toplanması ve başvuru öncesi hazırlıkların tamamlanması.</p>
-          </div>
-          <div class="fleet-card process-card">
-            <img src="assets/step2.jpg" alt="Yatırım Seçimi">
-            <h3>Yatırım Seçimi</h3>
-            <p>Golden Visa kriterlerine uygun gayrimenkul veya yatırım aracının seçilmesi.</p>
-          </div>
-          <div class="fleet-card process-card">
-            <img src="assets/step3.jpg" alt="Başvurunun Sunulması">
-            <h3>Başvurunun Sunulması</h3>
-            <p>Belgelerin resmi makamlara iletilmesi ve başvurunun yapılması.</p>
-          </div>
-          <div class="fleet-card process-card">
-            <img src="assets/step4.jpg" alt="Onay ve Oturma İzni">
-            <h3>Onay ve Oturma İzni</h3>
-            <p>Başvurunun onaylanması ve oturma izninin alınması.</p>
-          </div>
-          <div class="fleet-card process-card">
-            <img src="assets/step5.jpg" alt="Taşınma ve Yerleşim">
-            <h3>Taşınma ve Yerleşim</h3>
-            <p>Yunanistan’a taşınma ve yatırım yapılan mülkün kullanımına başlama.</p>
-          </div>
+          <div class="fleet-card process-card"><img src="assets/step1.jpg" alt="Başvuru Hazırlığı"><h3>Başvuru Hazırlığı</h3><p>Belgelerin toplanması ve başvuru öncesi hazırlıkların tamamlanması.</p></div>
+          <div class="fleet-card process-card"><img src="assets/step2.jpg" alt="Yatırım Seçimi"><h3>Yatırım Seçimi</h3><p>Golden Visa kriterlerine uygun gayrimenkul veya yatırım aracının seçilmesi.</p></div>
+          <div class="fleet-card process-card"><img src="assets/step3.jpg" alt="Başvurunun Sunulması"><h3>Başvurunun Sunulması</h3><p>Belgelerin resmi makamlara iletilmesi ve başvurunun yapılması.</p></div>
+          <div class="fleet-card process-card"><img src="assets/step4.jpg" alt="Onay ve Oturma İzni"><h3>Onay ve Oturma İzni</h3><p>Başvurunun onaylanması ve oturma izninin alınması.</p></div>
+          <div class="fleet-card process-card"><img src="assets/step5.jpg" alt="Taşınma ve Yerleşim"><h3>Taşınma ve Yerleşim</h3><p>Yunanistan’a taşınma ve yatırım yapılan mülkün kullanımına başlama.</p></div>
         </div>
-
         <button class="fleet-btn fleet-next">&#10095;</button>
       </div>
     </div>
   </section>
 
-  <!-- CONTACT -->
+  <!-- Contact -->
   <section id="contact" class="section">
     <div class="container grid">
       <div>
         <h2>İletişim</h2>
         <p>Hemen bizimle iletişime geçin, en kısa sürede Golden Visa başvurunuzu başlatalım.</p>
-
         <div class="contact-info">
           <div><strong>E-posta:</strong> info@orientagrup.com.tr</div>
           <div><strong>Telefon:</strong> +90 (536) 265 20 41</div>
-          <div><strong> Adres:</strong>Fenerbahçe Mah. Bağdat Cd. No:84/2 Kadıköy/İstanbul</div>
+          <div><strong>Adres:</strong> Fenerbahçe Mah. Bağdat Cd. No:84/2 Kadıköy/İstanbul</div>
         </div>
       </div>
-
       <div>
-        <!-- Formspree Formu AJAX ile -->
         <form class="contact-form card" id="contactForm">
-          <label>
-            Ad Soyad
-            <input type="text" name="name" placeholder="Adınız Soyadınız" required>
-          </label>
-          <label>
-            E-posta
-            <input type="email" name="email" placeholder="ornek@mail.com" required>
-          </label>
-          <label>
-            Mesaj
-            <textarea name="message" rows="5" placeholder="Lütfen kısaca ihtiyacınızı yazın..." required></textarea>
-          </label>
+          <label>Ad Soyad<input type="text" name="name" placeholder="Adınız Soyadınız" required></label>
+          <label>E-posta<input type="email" name="email" placeholder="ornek@mail.com" required></label>
+          <label>Mesaj<textarea name="message" rows="5" placeholder="Lütfen kısaca ihtiyacınızı yazın..." required></textarea></label>
           <button type="submit">Gönder</button>
         </form>
         <div id="thankMessage" style="display:none; color:black; margin-top:12px;">
@@ -196,36 +333,88 @@
 
   <!-- JS -->
   <script>
-    // Güncel yılı footer'a ekle
-    document.getElementById("year").textContent = new Date().getFullYear();
+    window.addEventListener("load", () => {
 
-    // Formspree AJAX submit
-    const form = document.getElementById("contactForm");
-    const thankMessage = document.getElementById("thankMessage");
+      // --- Yıl ---
+      const yearEl = document.getElementById("year");
+      if (yearEl) yearEl.textContent = new Date().getFullYear();
 
-    form.addEventListener("submit", function(e) {
-      e.preventDefault(); // Sayfa yönlenmesini engelle
+      // --- NAV ---
+      const toggle = document.querySelector(".nav__toggle");
+      const nav = document.querySelector(".nav");
 
-      const formData = new FormData(form);
+      if (toggle && nav) {
+        toggle.addEventListener("click", () => {
+          const isOpen = nav.classList.toggle("is-open");
+          toggle.setAttribute("aria-expanded", isOpen);
+        });
 
-      fetch("https://formspree.io/f/mpqyvgqb", {
-        method: "POST",
-        body: formData,
-        headers: { 'Accept': 'application/json' }
-      })
-      .then(response => {
-        if (response.ok) {
-          form.style.display = "none";
-          thankMessage.style.display = "block";
-        } else {
-          alert("Bir hata oluştu, lütfen tekrar deneyin.");
-        }
-      })
-      .catch(error => {
-        alert("Bir hata oluştu, lütfen tekrar deneyin.");
-        console.error(error);
+        nav.querySelectorAll("a").forEach(a => {
+          a.addEventListener("click", () => {
+            nav.classList.remove("is-open");
+            toggle.setAttribute("aria-expanded", "false");
+          });
+        });
+      }
+
+      // --- SMOOTH SCROLL ---
+      const topbar = document.querySelector(".topbar");
+      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function(e) {
+          e.preventDefault();
+          const target = document.querySelector(this.getAttribute("href"));
+          if (!target) return;
+          const offset = topbar ? topbar.offsetHeight : 0;
+          const top = target.getBoundingClientRect().top + window.scrollY - offset;
+          window.scrollTo({ top, behavior: "smooth" });
+        });
       });
+
+      // --- SLIDER ---
+      const track = document.querySelector(".fleet-track");
+      const prev = document.querySelector(".fleet-prev");
+      const next = document.querySelector(".fleet-next");
+
+      if (track && prev && next) {
+        let position = 0;
+        const getCardWidth = () => { const card = track.querySelector(".fleet-card"); if (!card) return 0; const gap = 20; return card.offsetWidth + gap; };
+        let cardWidth = getCardWidth();
+
+        const update = () => {
+          const max = track.scrollWidth - track.clientWidth;
+          if (position > 0) position = 0;
+          if (position < -max) position = -max;
+          track.style.transform = `translateX(${position}px)`;
+        };
+
+        window.addEventListener("resize", () => { cardWidth = getCardWidth(); update(); });
+
+        next.addEventListener("click", () => { position -= cardWidth; update(); });
+        prev.addEventListener("click", () => { position += cardWidth; update(); });
+
+        // DRAG
+        let startX=0, isDragging=false, startPos=0;
+        track.addEventListener("pointerdown", e => { isDragging=true; startX=e.clientX; startPos=position; track.style.transition="none"; track.setPointerCapture(e.pointerId); });
+        track.addEventListener("pointermove", e => { if(!isDragging) return; const diff = e.clientX - startX; track.style.transform=`translateX(${startPos+diff}px)`; });
+        const stop = e => { if(!isDragging) return; isDragging=false; const diff = (e.clientX||startX)-startX; if(Math.abs(diff)>cardWidth/4){ position=startPos+(diff>0?cardWidth:-cardWidth); } else { position=startPos; } track.style.transition="transform .4s ease"; update(); };
+        track.addEventListener("pointerup", stop); track.addEventListener("pointerleave", stop); track.addEventListener("pointercancel", stop);
+      }
+
+      // --- FORM ---
+      const form = document.getElementById("contactForm");
+      const thankMessage = document.getElementById("thankMessage");
+      if (form) {
+        form.addEventListener("submit", e => {
+          e.preventDefault();
+          const formData = new FormData(form);
+          fetch("https://formspree.io/f/mpqyvgqb", { method:"POST", body:formData, headers:{'Accept':'application/json'}})
+            .then(res => { if(res.ok){ form.style.display="none"; if(thankMessage) thankMessage.style.display="block"; } else { alert("Hata oluştu"); } })
+            .catch(() => alert("Bağlantı hatası"));
+        });
+      }
+
     });
   </script>
+
 </body>
 </html>
