@@ -43,49 +43,57 @@ window.addEventListener("load", () => {
 
   if(track && prev && next){
     let position = 0;
-    const cardWidth = track.querySelector(".fleet-card").offsetWidth + 20; // gap
-    const maxPosition = -(track.scrollWidth - track.clientWidth);
+
+    const card = track.querySelector(".fleet-card");
+    const gap = parseInt(getComputedStyle(track).gap) || 20;
+    const cardWidth = card.offsetWidth + gap;
 
     const updateSlider = () => {
+      const maxScroll = track.scrollWidth - track.clientWidth;
       if(position > 0) position = 0;
-      if(position < maxPosition) position = maxPosition;
+      if(position < -maxScroll) position = -maxScroll;
       track.style.transform = `translateX(${position}px)`;
     };
 
+    // Butonlar
     next.addEventListener("click", () => { position -= cardWidth; updateSlider(); });
     prev.addEventListener("click", () => { position += cardWidth; updateSlider(); });
 
-    // --- Mobil sürükleme ---
-    let startX = 0, currentX = 0, isDragging = false;
+    // Sürükleme
+    let startX = 0, isDragging = false, lastPosition = 0;
 
     track.addEventListener("pointerdown", e => {
       isDragging = true;
       startX = e.clientX;
+      lastPosition = position;
       track.style.cursor = "grabbing";
       track.style.transition = "none";
+      track.setPointerCapture(e.pointerId);
     });
 
     track.addEventListener("pointermove", e => {
       if(!isDragging) return;
-      currentX = e.clientX;
-      const diff = currentX - startX;
-      track.style.transform = `translateX(${position + diff}px)`;
+      const diff = e.clientX - startX;
+      track.style.transform = `translateX(${lastPosition + diff}px)`;
     });
 
-    const stopDrag = () => {
+    const stopDrag = e => {
       if(!isDragging) return;
       isDragging = false;
-      track.style.cursor = "grab";
-      const diff = currentX - startX;
+      const diff = (e.clientX || startX) - startX;
       if(Math.abs(diff) > cardWidth/4){
-        position += diff > 0 ? cardWidth : -cardWidth;
+        position = lastPosition + (diff > 0 ? cardWidth : -cardWidth);
+      } else {
+        position = lastPosition;
       }
       updateSlider();
-      track.style.transition = "transform .4s ease";
+      track.style.transition = "transform 0.4s ease";
+      track.style.cursor = "grab";
     };
 
     track.addEventListener("pointerup", stopDrag);
     track.addEventListener("pointerleave", stopDrag);
+    track.addEventListener("pointercancel", stopDrag);
   }
 
   // --- AJAX FORMSPREE ---
