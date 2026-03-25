@@ -36,26 +36,26 @@ window.addEventListener("load", () => {
     });
   });
 
-  // --- FİLO SLIDER ---
+  // --- FLEET / PROCESS SLIDER ---
   const track = document.querySelector(".fleet-track");
   const prev = document.querySelector(".fleet-prev");
   const next = document.querySelector(".fleet-next");
 
-  if (track && prev && next) {
+  if(track && prev && next){
     let position = 0;
-    const cardWidth = track.querySelector(".fleet-card").offsetWidth + 20; // 20 = gap
+    const cardWidth = track.querySelector(".fleet-card").offsetWidth + 20; // gap
+    const maxPosition = -(track.scrollWidth - track.clientWidth);
 
     const updateSlider = () => {
-      const maxPosition = -(track.scrollWidth - track.clientWidth);
-      if (position < maxPosition) position = maxPosition;
-      if (position > 0) position = 0;
+      if(position > 0) position = 0;
+      if(position < maxPosition) position = maxPosition;
       track.style.transform = `translateX(${position}px)`;
     };
 
     next.addEventListener("click", () => { position -= cardWidth; updateSlider(); });
     prev.addEventListener("click", () => { position += cardWidth; updateSlider(); });
 
-    // Mobil sürükleme
+    // --- Mobil sürükleme ---
     let startX = 0, currentX = 0, isDragging = false;
 
     track.addEventListener("pointerdown", e => {
@@ -66,20 +66,22 @@ window.addEventListener("load", () => {
     });
 
     track.addEventListener("pointermove", e => {
-      if (!isDragging) return;
+      if(!isDragging) return;
       currentX = e.clientX;
       const diff = currentX - startX;
       track.style.transform = `translateX(${position + diff}px)`;
     });
 
     const stopDrag = () => {
-      if (!isDragging) return;
+      if(!isDragging) return;
       isDragging = false;
       track.style.cursor = "grab";
       const diff = currentX - startX;
-      if (Math.abs(diff) > cardWidth / 4) position += diff > 0 ? cardWidth : -cardWidth;
-      track.style.transition = "transform .4s ease";
+      if(Math.abs(diff) > cardWidth/4){
+        position += diff > 0 ? cardWidth : -cardWidth;
+      }
       updateSlider();
+      track.style.transition = "transform .4s ease";
     };
 
     track.addEventListener("pointerup", stopDrag);
@@ -92,7 +94,7 @@ window.addEventListener("load", () => {
 
   if (form) {
     form.addEventListener('submit', e => {
-      e.preventDefault(); // sayfa yenilenmesin
+      e.preventDefault();
       const formData = new FormData(form);
 
       fetch("https://formspree.io/f/mgonyewa", {
@@ -101,9 +103,9 @@ window.addEventListener("load", () => {
         headers: { 'Accept': 'application/json' }
       })
       .then(response => {
-        if (response.ok) {
+        if(response.ok){
           form.style.display = "none";
-          if (thankMessage) thankMessage.style.display = "block";
+          if(thankMessage) thankMessage.style.display = "block";
         } else {
           return response.json().then(data => { throw new Error(data.error || "Bir hata oluştu!"); });
         }
