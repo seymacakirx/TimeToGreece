@@ -1,11 +1,7 @@
-window.addEventListener("load", () => {
-
-  // --- Yıl otomatik ---
+document.addEventListener("DOMContentLoaded", () => {
   const yearEl = document.getElementById("year");
   if (yearEl) yearEl.textContent = new Date().getFullYear();
 
-
-  // --- Nav toggle ---
   const toggle = document.querySelector(".nav__toggle");
   const nav = document.querySelector(".nav");
 
@@ -23,74 +19,45 @@ window.addEventListener("load", () => {
     });
   }
 
-
-  // --- Smooth scroll ---
-  const topbar = document.querySelector('.topbar');
+  // Smooth scroll with offset for fixed topbar
+  const topbarHeight = document.querySelector('.topbar').offsetHeight;
 
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function(e) {
       e.preventDefault();
-
       const target = document.querySelector(this.getAttribute('href'));
-      if (!target) return;
+      if (target) {
+        const targetPosition = target.getBoundingClientRect().top + window.scrollY - topbarHeight;
+        window.scrollTo({
+          top: targetPosition,
+          behavior: 'smooth'
+        });
+      }
 
-      const topbarHeight = topbar ? topbar.offsetHeight : 0;
-
-      const targetPosition =
-        target.getBoundingClientRect().top +
-        window.scrollY -
-        topbarHeight;
-
-      window.scrollTo({
-        top: targetPosition,
-        behavior: 'smooth'
-      });
-
-      if (nav && nav.classList.contains('is-open')) {
+      // Mobil menüyü kapat
+      if (nav.classList.contains('is-open')) {
         nav.classList.remove('is-open');
         toggle.setAttribute('aria-expanded', 'false');
       }
     });
   });
 
-
-  // --- SLIDER ---
+  // --- FİLO SLIDER KODU ---
   const track = document.querySelector(".fleet-track");
   const prev = document.querySelector(".fleet-prev");
   const next = document.querySelector(".fleet-next");
 
   if (track && prev && next) {
-
     let position = 0;
-    let cardWidth = 0;
-
-    const getCardWidth = () => {
-      const card = track.querySelector(".fleet-card");
-      if (!card) return 0;
-
-      const gap = parseInt(getComputedStyle(track).gap) || 20;
-      return card.offsetWidth + gap;
-    };
+    const cardWidth = track.querySelector(".fleet-card").offsetWidth + 20;
 
     const updateSlider = () => {
-      const maxScroll = track.scrollWidth - track.clientWidth;
-
+      const maxPosition = -(track.scrollWidth - track.clientWidth);
+      if (position < maxPosition) position = maxPosition;
       if (position > 0) position = 0;
-      if (position < -maxScroll) position = -maxScroll;
-
       track.style.transform = `translateX(${position}px)`;
     };
 
-    const recalc = () => {
-      cardWidth = getCardWidth();
-      updateSlider();
-    };
-
-    // İlk hesaplama
-    recalc();
-    window.addEventListener("resize", recalc);
-
-    // Butonlar
     next.addEventListener("click", () => {
       position -= cardWidth;
       updateSlider();
@@ -101,77 +68,61 @@ window.addEventListener("load", () => {
       updateSlider();
     });
 
-    // Drag
+    // Mobil parmakla kaydırma
     let startX = 0;
+    let currentX = 0;
     let isDragging = false;
-    let lastPosition = 0;
 
     track.addEventListener("pointerdown", e => {
       isDragging = true;
       startX = e.clientX;
-      lastPosition = position;
-
       track.style.cursor = "grabbing";
       track.style.transition = "none";
-
-      track.setPointerCapture(e.pointerId);
     });
 
     track.addEventListener("pointermove", e => {
       if (!isDragging) return;
-
-      const diff = e.clientX - startX;
-      track.style.transform = `translateX(${lastPosition + diff}px)`;
+      currentX = e.clientX;
+      const diff = currentX - startX;
+      track.style.transform = `translateX(${position + diff}px)`;
     });
 
-    const stopDrag = (e) => {
+    const stopDrag = () => {
       if (!isDragging) return;
-
       isDragging = false;
-
-      const diff = (e.clientX || startX) - startX;
-
-      if (Math.abs(diff) > cardWidth / 4) {
-        position = lastPosition + (diff > 0 ? cardWidth : -cardWidth);
-      } else {
-        position = lastPosition;
-      }
-
-      track.style.transition = "transform 0.4s ease";
       track.style.cursor = "grab";
-
+      const diff = currentX - startX;
+      if (Math.abs(diff) > cardWidth / 4) {
+        position += diff > 0 ? cardWidth : -cardWidth;
+      }
+      track.style.transition = "transform .4s ease";
       updateSlider();
     };
 
     track.addEventListener("pointerup", stopDrag);
     track.addEventListener("pointerleave", stopDrag);
-    track.addEventListener("pointercancel", stopDrag);
   }
 
-
-  // --- AJAX FORMSPREE ---
-  const form = document.querySelector('form.contact-form.card');
-  const thankMessage = document.getElementById("thankMessage");
-
-  if (form) {
-    form.addEventListener('submit', e => {
-      e.preventDefault();
+  // --- AJAX FORMSPREE GÖNDERİMİ ---
+  const form = document.querySelector('form.card.form');
+  if(form) {
+    form.addEventListener('submit', function(e) {
+      e.preventDefault(); // Sayfanın yenilenmesini engelle
 
       const formData = new FormData(form);
 
       fetch("https://formspree.io/f/mgonyewa", {
         method: "POST",
         body: formData,
-        headers: { 'Accept': 'application/json' }
+        headers: {
+          'Accept': 'application/json'
+        }
       })
       .then(response => {
         if (response.ok) {
-          form.reset();
-          form.style.display = "none";
-
-          if (thankMessage) {
-            thankMessage.style.display = "block";
-          }
+          console.log("Mesaj başarıyla gönderildi!");
+          form.reset(); // formu temizle
+          alert("Mesajınız gönderildi, teşekkürler!"); // istersen alert yerine HTML mesaj divi kullan
         } else {
           return response.json().then(data => {
             throw new Error(data.error || "Bir hata oluştu!");
@@ -184,5 +135,4 @@ window.addEventListener("load", () => {
       });
     });
   }
-
 });
