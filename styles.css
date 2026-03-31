@@ -126,12 +126,39 @@ h2{ font-size: 30px; margin:0 0 10px; }
 .grid{ display:grid; grid-template-columns: 1.15fr .85fr; gap:24px; }
 .cards{ display:grid; grid-template-columns: repeat(3, 1fr); gap:18px; margin-top: 18px; }
 
+/* ----------------------------- */
+/* Kartlar sabit yüksekliğe sahip */
+/* ----------------------------- */
 .card{
   background: var(--card-bg);
   border:1px solid var(--card-border);
   border-radius: var(--radius);
   padding:18px;
   box-shadow: var(--shadow);
+
+  height: 220px;          /* sabit yükseklik */
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  overflow: hidden;
+  position: relative;
+}
+
+.card h3{
+  margin:0 0 8px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2; /* max 2 satır başlık */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.card p{
+  margin:0;
+  color: rgba(26,26,26,.7);
+  display: -webkit-box;
+  -webkit-line-clamp: 3; /* max 3 satır içerik */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 /* Contact */
@@ -187,6 +214,7 @@ h2{ font-size: 30px; margin:0 0 10px; }
   background: var(--card-bg);
   border-radius: var(--radius);
   box-shadow: var(--shadow);
+  overflow: hidden;
 }
 
 .fleet-card img {
