@@ -123,41 +123,46 @@ a{ color:inherit; text-decoration:none; }
 h2{ font-size: 30px; margin:0 0 10px; }
 .lead{ margin:0 0 26px; color: var(--muted); }
 
-/* Grid ve kartlar */
-.grid{ display:grid; grid-template-columns: 1.15fr .85fr; gap:24px; }
-.cards{ display:grid; grid-template-columns: repeat(3, 1fr); gap:18px; margin-top: 18px; }
-
-/* Kartlar */
-.card{
-  background: var(--card-bg);
-  border:1px solid var(--card-border);
-  border-radius: var(--radius);
-  padding:18px;
-  box-shadow: var(--shadow);
-
-  height: 220px;          
-  display: flex;
-  flex-direction: column; 
-  justify-content: flex-start;
-  overflow: hidden;
-  position: relative;
+/* ----------------------------- */
+/* Süreç kısmı: 8 kutucuk, 4+4 grid */
+/* ----------------------------- */
+.surec-container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+  margin-top: 40px;
 }
 
-.card h3{
-  margin:0 0 8px;
+.surec-card {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius);
+  padding: 18px;
+  box-shadow: var(--shadow);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  overflow: visible; 
+  min-height: 180px;
+}
+
+.surec-card h3 {
+  margin: 0 0 8px;
+  font-size: 18px;
+  line-height: 1.3;
   display: -webkit-box;
-  -webkit-line-clamp: 2; 
+  -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
 
-.card p,
-.card li {
+.surec-card p {
   margin: 0;
-  color: rgba(26,26,26,.7);
-  display: block;          
-  white-space: normal;      
-  word-break: break-word;   
+  color: var(--muted);
+  line-height: 1.5;
+  white-space: normal !important;
+  word-break: break-word !important;
+  overflow-wrap: break-word;
 }
 
 /* Contact */
@@ -190,98 +195,43 @@ h2{ font-size: 30px; margin:0 0 10px; }
 
 /* Footer */
 .footer{ padding:26px 0; border-top:1px solid rgba(0,0,0,.05); color: var(--muted); }
-
-/* ===== SLIDER ===== */
-.fleet-slider {
-  position: relative;
-  margin-top: 30px;
-  overflow: hidden;
+.footer__inner{
+  display:flex;
+  justify-content:space-between;
+  gap:16px;
+  flex-wrap:wrap;
 }
-
-.fleet-track {
-  display: flex;
-  gap: 20px;
-  transition: transform .4s ease;
-  cursor: grab;
-  will-change: transform;
-  touch-action: pan-y;
+.footer__links{
+  display:flex;
+  gap:14px;
 }
-
-.fleet-card{
-  flex: 0 0 auto;
-  width: 320px;
-  background: var(--card-bg);
-  border-radius: var(--radius);
-  box-shadow: var(--shadow);
-  overflow: hidden;
-
-  display: flex;
-  flex-direction: column; 
-  justify-content: flex-start;
-  height: 300px; 
-  position: relative;
-}
-
-.fleet-card img{
-  width: 100%;
-  height: 200px;
-  object-fit: cover;
-}
-
-.fleet-card h3{
-  margin:14px 16px 6px;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-}
-
-.fleet-card p{
-  margin:0 16px 18px;
-  color:rgba(26,26,26,.7);
-  display: block;
-  white-space: normal;
-  word-break: break-word;
-}
-
-.fleet-btn{
-  position:absolute;
-  top:50%;
-  transform:translateY(-50%);
-  width:44px;
-  height:44px;
-  border-radius:50%;
-  border:none;
-  background:rgba(0,0,0,.5);
-  color:white;
-  font-size:22px;
-  cursor:pointer;
-  z-index:10;
-}
-
-.fleet-prev { left: 10px; }
-.fleet-next { right: 10px; }
+.footer__links a:hover{ text-decoration: underline; }
 
 /* Responsive */
-@media (max-width: 900px){
-  .cards{ grid-template-columns: 1fr; }
-  .grid{ grid-template-columns: 1fr; }
+@media (max-width: 1024px){
+  .surec-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
 @media (max-width: 720px){
+  .surec-container {
+    grid-template-columns: 1fr;
+  }
+  .cards{ grid-template-columns: 1fr; }
+  .grid{ grid-template-columns: 1fr; }
   .nav{ display:none; }
   .nav__toggle{ display:inline-block; }
-
   .nav.is-open{
     display:flex;
     position:absolute;
     top:76px;
     right:20px;
     flex-direction:column;
+    align-items:stretch;
     background:white;
     padding:10px;
     border-radius:12px;
   }
-
   .brand__logo{ height:90px; }
 }
