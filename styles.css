@@ -127,9 +127,7 @@ h2{ font-size: 30px; margin:0 0 10px; }
 .grid{ display:grid; grid-template-columns: 1.15fr .85fr; gap:24px; }
 .cards{ display:grid; grid-template-columns: repeat(3, 1fr); gap:18px; margin-top: 18px; }
 
-/* ----------------------------- */
-/* Kartlar dikey, sabit yüksekliğe sahip, süreç yazıları alt satıra geçer */
-/* ----------------------------- */
+/* Kartlar */
 .card{
   background: var(--card-bg);
   border:1px solid var(--card-border);
@@ -193,7 +191,7 @@ h2{ font-size: 30px; margin:0 0 10px; }
 /* Footer */
 .footer{ padding:26px 0; border-top:1px solid rgba(0,0,0,.05); color: var(--muted); }
 
-/* ===== SLIDER FINAL ===== */
+/* ===== SLIDER ===== */
 .fleet-slider {
   position: relative;
   margin-top: 30px;
