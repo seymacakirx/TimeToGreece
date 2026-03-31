@@ -4,11 +4,10 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Time To Greece</title>
-  
   <meta name="google-site-verification" content="pnI3V3iGcBppf5JQPmLrzqFVSa_Gm7CjlAsFXxGlSUM" />
-  
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
   <meta name="description" content="Time To Greece — Yunanistan Golden Visa ve yatırım danışmanlığı." />
+
   <style>
     :root{
       --bg: #ffffff;          
@@ -23,7 +22,6 @@
       --radius:16px;
     }
 
-    /* Temel stiller */
     *{ box-sizing:border-box; }
     html{ scroll-behavior:smooth; }
     body{
@@ -43,12 +41,12 @@
       position: fixed;
       top:0; left:0; right:0;
       z-index:50;
-      background: rgba(255,255,255,0.7);
+      background: rgba(255,255,255,0.9);
       border-bottom:1px solid rgba(0,0,0,.08);
       backdrop-filter: blur(10px);
     }
     .topbar__inner{ display:flex; align-items:center; justify-content:space-between; height:76px; gap:16px; }
-    .brand__logo{ height:120px; width:auto; display:block; }
+    .brand__logo{ height:80px; width:auto; display:block; }
     .nav{ display:flex; gap:22px; align-items:center; }
     .nav a{ font-weight:600; color: rgba(26,26,26,.9); padding:10px 8px; border-radius:10px; }
     .nav__toggle{
@@ -186,8 +184,22 @@
     .process-card p{ margin:0; color:var(--muted); line-height:1.4; }
 
     /* Responsive */
-    @media (max-width:1024px){ .process-container{ grid-template-columns: repeat(2,1fr); } }
-    @media (max-width:720px){ .process-container{ grid-template-columns:1fr; } }
+    @media (max-width:1024px){ 
+      .process-container{ grid-template-columns: repeat(2,1fr); } 
+      .cards{ grid-template-columns: repeat(2,1fr); }
+    }
+    @media (max-width:720px){
+      .topbar__inner{ flex-direction:row; height:auto; padding:8px 16px; align-items:center; }
+      .brand__logo{ height:50px; }
+      .nav{ display:none; flex-direction:column; gap:12px; position:absolute; top:76px; right:16px; background: rgba(255,255,255,.95); padding:12px; border-radius:12px; box-shadow:var(--shadow); width:calc(100% - 32px); }
+      .nav a{ padding:10px 0; }
+      .nav.active{ display:flex; }
+      .nav__toggle{ display:block; }
+
+      .grid{ grid-template-columns:1fr; }
+      .cards{ grid-template-columns:1fr; }
+      .process-container{ grid-template-columns:1fr; }
+    }
   </style>
 </head>
 <body>
@@ -315,16 +327,6 @@
   </footer>
 
   <!-- JS -->
-  <script>
-    window.addEventListener("load", () => {
-
-      // --- Yıl ---
-      const yearEl = document.getElementById("year");
-      if (yearEl) yearEl.textContent = new Date().getFullYear();
-
-      // --- NAV ---
-      const toggle = document.querySelector(".nav__toggle");
-      const nav = document.querySelector(".nav");
-
-      if (toggle && nav) {
-       
+  <script src="main.js"></script>
+</body>
+</html>
